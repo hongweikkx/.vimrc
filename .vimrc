@@ -39,13 +39,15 @@ set background=dark
 colorscheme desert
 set ts=4
 set expandtab
-set noswapfile
+" set noswapfile
 set showmatch
 set hlsearch
 set incsearch
 filetype plugin on
 filetype indent on
 %retab!
+" 使用系统剪切板
+set clipboard=unnamed
 
 
 " NERDTree
@@ -176,7 +178,6 @@ let g:ag_working_path_mode="r"
 let g:ctrlsf_default_root = 'project' 
 let g:ackprg = 'ag --nogroup --nocolor --column'
 let g:ctrlsf_ackprg = 'ag'
-let g:ctrlsf_position = "left"
 vmap  <c-f> <Plug>CtrlSFVwordPath
 let g:ctrlsf_search_mode = 'async'
 let g:ctrlsf_position = 'bottom'
@@ -210,9 +211,6 @@ let g:NERDToggleCheckAllLines = 1
 
 let mapleader=","
 
-" 使用系统剪切板
-set clipboard=unnamed
-
 " 打开文件时 恢复光标位置
 autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
@@ -227,3 +225,17 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " 当前行显示
 autocmd InsertLeave,WinEnter * set cursorline
 autocmd InsertEnter,WinLeave * set nocursorline
+nnoremap <leader>q :q<cr>
+nnoremap <leader>x :x<cr>
+nnoremap <leader>w :w<cr>
+
+" 允许在有未保存的修改时切换缓冲区，此时的修改由 vim 负责保存
+set hidden
+set nowrapscan " 禁止在搜索到文件两端时重新搜索
+
+inoremap ' ''<ESC>i
+inoremap " ""<ESC>i
+inoremap ( ()<ESC>i
+inoremap [ []<ESC>i
+inoremap { {<CR>}<ESC>O
+
